@@ -141,7 +141,9 @@ export class BookingUtils {
 
     // Hide completed and cancelled bookings
     if (
-      CONFIG.STATUS_RULES.hidden.some((hidden) => lowerStatus.includes(hidden))
+      CONFIG.STATUS_RULES?.hidden?.some((hidden) =>
+        lowerStatus.includes(hidden)
+      )
     ) {
       return false;
     }
@@ -185,7 +187,7 @@ export class BookingUtils {
     } catch (error) {
       console.error("Error loading booking data:", error);
       console.log("Using sample data as fallback...");
-      return CONFIG.SAMPLE_DATA;
+      return CONFIG.SAMPLE_DATA || [];
     }
   }
 
@@ -203,13 +205,17 @@ export class BookingUtils {
   // Get room configuration
   static getRoomConfig(roomType) {
     const roomKey = roomType.toLowerCase();
-    return CONFIG.ROOMS[roomKey] || CONFIG.ROOMS.default;
+    return CONFIG.ROOMS?.[roomKey] || CONFIG.ROOMS?.default || {};
   }
 
   // Open booking URL
   static openBookingUrl() {
-    window.open(CONFIG.COMPANY.bookingUrl, "_blank");
+    if (typeof window !== "undefined") {
+      window.open(CONFIG.COMPANY?.bookingUrl, "_blank");
+    }
   }
+
+  // Classify booking time
   static classifyBookingTime(booking) {
     if (!booking.time) return "full-day";
 
@@ -249,6 +255,7 @@ export class NavigationUtils {
     }
   }
 
+  // Analyze booking periods
   static analyzeBookingPeriods(bookings) {
     let hasMorning = false;
     let hasAfternoon = false;
@@ -357,6 +364,16 @@ export const RoomFeatures = {
     "Product launches and company announcements",
     "Industry conferences and networking events",
   ],
+  "event space": [
+    "Corporate team building and outdoor activities",
+    "Company picnics and social gatherings",
+    "Product launches and outdoor exhibitions",
+    "Training workshops and seminars",
+    "Cultural events and celebrations",
+    "Large-scale conferences and outdoor meetings",
+    "Networking events and business mixers",
+    "Wedding receptions and private celebrations",
+  ],
   "event space indoor": [
     "Corporate events and conferences",
     "Training programs and workshops",
@@ -374,8 +391,6 @@ export const RoomFeatures = {
 };
 
 // Room amenities configuration
-// Update your calendar.js RoomAmenities to use correct icon names
-
 export const RoomAmenities = {
   "focus capsule": [
     {
@@ -445,13 +460,13 @@ export const RoomAmenities = {
         "Accommodates 30-70 people with multiple seating configurations: U-Shape (30-40), Long Table Conference (25-35), Boardroom Style (20-30), Hollow Square (35-45), Classroom Style (50-70), Theater Style (60-70).",
     },
     {
-      icon: "Monitor", // Changed from "Presentation" to "Monitor"
+      icon: "Monitor",
       title: "Professional AV Equipment",
       description:
         "Large projection screen with 4K projector for professional presentations, visual content, and multimedia displays suitable for large audiences.",
     },
     {
-      icon: "Monitor",
+      icon: "Volume2", // Changed to Volume2 for sound system
       title: "Sound System & Microphones",
       description:
         "Professional sound system with wireless microphones ensuring clear audio throughout the facility for presentations, training sessions, and conferences.",
@@ -463,7 +478,44 @@ export const RoomAmenities = {
         "High-speed, reliable internet connection capable of supporting large groups, streaming requirements, and simultaneous device connections for corporate events.",
     },
   ],
-
+  "event space": [
+    {
+      icon: "Users",
+      title: "Large-Scale Outdoor Capacity",
+      description:
+        "Accommodates 50+ people with flexible setup options: Open lawn setup for large gatherings (100+ people), tent and canopy arrangements, stage setups, banquet configurations, and activity zones.",
+    },
+    {
+      icon: "Calendar",
+      title: "Event Setup Services",
+      description:
+        "Professional event planning, table and chair arrangements, stage setup, decorations, and complete event coordination for all types of outdoor events.",
+    },
+    {
+      icon: "Coffee",
+      title: "Catering Services",
+      description:
+        "Full catering options, beverage stations, outdoor kitchen facilities, and dining setups for events of all sizes with professional service staff.",
+    },
+    {
+      icon: "Monitor",
+      title: "Audio-Visual Equipment",
+      description:
+        "Portable sound systems, wireless microphones, outdoor screens, professional lighting, and multimedia equipment for presentations and entertainment.",
+    },
+    {
+      icon: "Users",
+      title: "Weather Protection",
+      description:
+        "Tent rentals, canopies, covered seating areas, backup indoor options, and weather contingency planning for year-round event hosting.",
+    },
+    {
+      icon: "Wifi",
+      title: "Outdoor Wi-Fi Coverage",
+      description:
+        "Extended wireless network coverage throughout the event space ensuring reliable connectivity for all attendees and event requirements.",
+    },
+  ],
   "event space indoor": [
     {
       icon: "Users",
@@ -492,7 +544,7 @@ export const RoomAmenities = {
         "Beautiful outdoor setting for 50-300 guests with garden views, flexible setup options, and weather contingency planning.",
     },
     {
-      icon: "Users",
+      icon: "Calendar",
       title: "Complete Event Services",
       description:
         "Full event planning, catering coordination, tent rentals, decorations, and professional event management staff.",
@@ -504,4 +556,60 @@ export const RoomAmenities = {
         "Reliable wireless network coverage throughout outdoor areas with backup connectivity solutions.",
     },
   ],
+};
+
+// ===============================
+// LEGACY EXPORTS FOR COMPATIBILITY
+// ===============================
+
+// Export individual functions that might be imported directly
+export const getDaysOfWeek = CalendarUtils.getDaysOfWeek;
+export const getMonthName = CalendarUtils.getMonthName;
+export const formatDate = CalendarUtils.formatDate;
+export const generateCalendarDays = CalendarUtils.generateCalendarDays;
+export const groupIntoWeeks = CalendarUtils.groupIntoWeeks;
+export const calculateStats = CalendarUtils.calculateStats;
+
+// Booking utilities exports
+export const shouldDisplayBooking = BookingUtils.shouldDisplayBooking;
+export const loadBookingData = BookingUtils.loadBookingData;
+export const fetchBookingData = BookingUtils.loadBookingData; // Alias
+export const filterBookingsForRoom = BookingUtils.filterBookingsForRoom;
+export const getRoomConfig = BookingUtils.getRoomConfig;
+export const openBookingUrl = BookingUtils.openBookingUrl;
+export const classifyBookingTime = BookingUtils.classifyBookingTime;
+
+// Navigation utilities exports
+export const handlePrevMonth = NavigationUtils.handlePrevMonth;
+export const handleNextMonth = NavigationUtils.handleNextMonth;
+export const getPrevMonth = NavigationUtils.handlePrevMonth; // Alias
+export const getNextMonth = NavigationUtils.handleNextMonth; // Alias
+export const analyzeBookingPeriods = NavigationUtils.analyzeBookingPeriods;
+
+// Default export for convenience
+export default {
+  CalendarUtils,
+  BookingUtils,
+  NavigationUtils,
+  RoomFeatures,
+  RoomAmenities,
+  // Legacy function exports
+  getDaysOfWeek,
+  getMonthName,
+  formatDate,
+  generateCalendarDays,
+  groupIntoWeeks,
+  calculateStats,
+  shouldDisplayBooking,
+  loadBookingData,
+  fetchBookingData,
+  filterBookingsForRoom,
+  getRoomConfig,
+  openBookingUrl,
+  classifyBookingTime,
+  handlePrevMonth,
+  handleNextMonth,
+  getPrevMonth,
+  getNextMonth,
+  analyzeBookingPeriods,
 };
