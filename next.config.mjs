@@ -6,9 +6,8 @@ const nextConfig = {
   // Add other config options as needed
   poweredByHeader: false,
   images: {
-    formats: ["image/webp", "image/jpg", "image/png"],
+    formats: ["image/webp", "image/avif"],
   },
 };
 
-// Export the variable instead of anonymous object
-module.exports = nextConfig;
+export default nextConfig;
