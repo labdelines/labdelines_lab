@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import logo from "@/public/assets/la_petite.png";
 
+import { lazy, Suspense } from "react";
+
 // Import individual drink images
 import matchaLatte from "@/public/assets/Coffee/01_matcha_latte.png";
 import caramelMacchiato from "@/public/assets/Coffee/02_caramel_macchiato.png";
