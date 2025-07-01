@@ -8,6 +8,10 @@ import {
   Phone,
   Check,
   CheckCircle,
+  Code,
+  CoffeeIcon,
+  Edit, // For whiteboards
+  Presentation, // For presentation equipment
 } from "lucide-react";
 
 import {
@@ -16,17 +20,21 @@ import {
   NavigationUtils,
   RoomFeatures,
   RoomAmenities,
+  PresentationFacilities, // Add this import
 } from "@/src/lib/calendar.js";
 
 import Image from "next/image";
 
-import sharedhivesImg from "@/public/assets/sharedhives.png";
+import sharedhivesImg from "@/public/assets/sharedhives.jpeg";
 import sharedhivesPrice from "@/public/assets/shared_hives_price.webp";
 
 const SharedHives = () => {
   const handleBookNow = () => {
     BookingUtils.openBookingUrl();
   };
+
+  // Define the room key for consistency with your other components
+  const roomKey = "share hives";
 
   return (
     <div className="min-h-screen pt-10 bg-gray-50">
@@ -56,11 +64,63 @@ const SharedHives = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-600 leading-relaxed transition-colors duration-300 hover:text-gray-700">
-                  A space buzzing with creative energy, where ideas dance in the
-                  air and collaboration happens effortlessly. That's Share Hive,
-                  the heart of Lab de Lines.
-                </p>
+                {/* Equipment & Facilities - Replace room description */}
+                {PresentationFacilities[roomKey] ? (
+                  <div className="mb-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {PresentationFacilities[roomKey].map(
+                        (facility, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center space-x-2 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+                          >
+                            <div className="w-6 h-6 flex items-center justify-center">
+                              {facility.icon === "Monitor" && (
+                                <Check className="w-4 h-4 text-gray-600" />
+                              )}
+                              {facility.icon === "Code" && (
+                                <Code className="w-4 h-4 text-gray-600" />
+                              )}
+                              {facility.icon === "Users" && (
+                                <Users className="w-4 h-4 text-gray-600" />
+                              )}
+                              {facility.icon === "Wifi" && (
+                                <Wifi className="w-4 h-4 text-gray-600" />
+                              )}
+                              {facility.icon === "Presentation" && (
+                                <Presentation className="w-4 h-4 text-gray-600" />
+                              )}
+                              {facility.icon === "Coffee" && (
+                                <Coffee className="w-4 h-4 text-gray-600" />
+                              )}
+                              {/* Fallback icon */}
+                              {![
+                                "Monitor",
+                                "Code",
+                                "Users",
+                                "Wifi",
+                                "Presentation",
+                                "Coffee",
+                              ].includes(facility.icon) && (
+                                <Check className="w-4 h-4 text-gray-600" />
+                              )}
+                            </div>
+                            <span className="text-xs font-medium text-gray-700 leading-tight">
+                              {facility.name}
+                            </span>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  // Fallback to original room description if no facilities defined
+                  <p className="text-gray-600 text-xl text-center font-bold pb-6 leading-relaxed">
+                    A space buzzing with creative energy, where ideas dance in
+                    the air and collaboration happens effortlessly. That's Share
+                    Hive, the heart of Lab de Lines.
+                  </p>
+                )}
 
                 <div className="bg-white rounded-lg shadow-sm p-4 mt-4 transition-all duration-300 hover:shadow-md">
                   <div className="flex flex-row sm:flex-row gap-2">
@@ -107,14 +167,14 @@ const SharedHives = () => {
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <button
-                onClick={handleBookNow}
-                className="w-full bg-red-800 hover:bg-red-900 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center transform hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
-              >
-                Contact Us
-              </button>
+                <button
+                  onClick={handleBookNow}
+                  className="w-full bg-red-800 hover:bg-red-900 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center transform hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] mt-4"
+                >
+                  Book now
+                </button>
+              </div>
             </div>
 
             {/* Features Section */}
@@ -160,10 +220,20 @@ const SharedHives = () => {
                 />
               </div>
 
-              {/* Amenities */}
-              <div className="space-y-4">
-                <div className="bg-white rounded-lg shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:scale-[1.02] lg:hover:scale-[1.01] group">
-                  <div className="flex items-start space-x-4">
+              {/* Updated Amenities Section with Room Description */}
+              <div className="bg-white rounded-lg shadow-sm p-6 transition-all duration-300 hover:shadow-md">
+                {/* Room Description - Above amenities */}
+                <div className="mb-6">
+                  <p className="text-gray-600 text-xl text-center font-bold pb-6 leading-relaxed">
+                    A space buzzing with creative energy, where ideas dance in
+                    the air and collaboration happens effortlessly. That's Share
+                    Hive, the heart of Lab de Lines.
+                  </p>
+                </div>
+
+                {/* Amenities */}
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-4 group transition-all duration-300 hover:bg-gray-50 p-4 rounded-lg">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0 bg-amber-500 transition-all duration-300 group-hover:bg-amber-600 group-hover:scale-110">
                       <Armchair className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                     </div>
@@ -177,10 +247,8 @@ const SharedHives = () => {
                       </p>
                     </div>
                   </div>
-                </div>
 
-                <div className="bg-white rounded-lg shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:scale-[1.02] lg:hover:scale-[1.01] group">
-                  <div className="flex items-start space-x-4">
+                  <div className="flex items-start space-x-4 group transition-all duration-300 hover:bg-gray-50 p-4 rounded-lg">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0 bg-amber-500 transition-all duration-300 group-hover:bg-amber-600 group-hover:scale-110">
                       <Coffee className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                     </div>
@@ -194,10 +262,8 @@ const SharedHives = () => {
                       </p>
                     </div>
                   </div>
-                </div>
 
-                <div className="bg-white rounded-lg shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:scale-[1.02] lg:hover:scale-[1.01] group">
-                  <div className="flex items-start space-x-4">
+                  <div className="flex items-start space-x-4 group transition-all duration-300 hover:bg-gray-50 p-4 rounded-lg">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0 bg-amber-500 transition-all duration-300 group-hover:bg-amber-600 group-hover:scale-110">
                       <Wifi className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                     </div>

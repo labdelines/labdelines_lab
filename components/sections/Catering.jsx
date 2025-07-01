@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import catteringImg from "@/public/assets/cattering.jpg";
+import catteringImg from "@/public/assets/catering.png";
 
 import React from "react";
 import { Coffee, Cookie, Sandwich, Cake, Phone } from "lucide-react";

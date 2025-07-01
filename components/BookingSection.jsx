@@ -5,11 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 // Images for workspaces
-import SharedHives from "@/public/assets/sharedhives.png";
+import SharedHives from "@/public/assets/sharedhives.jpeg";
 import FocusCapsule from "@/public/assets/focus_capsule.jpg";
 import ThinkTank from "@/public/assets/think_tank.jpg";
-import Underlines from "@/public/assets/underlines.png";
-import EventSpace from "@/public/assets/LAB_building.png";
+import Underlines from "@/public/assets/underlines.jpeg";
 import Event4 from "@/public/assets/PastExp/wedding_img.jpg";
 
 const BookingSection = () => {

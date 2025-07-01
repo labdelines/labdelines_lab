@@ -1,10 +1,10 @@
 // Configuration file for the booking calendar
 
 // Import room images
-import SharedHives from "@/public/assets/sharedhives.png";
+import SharedHives from "@/public/assets/sharedhives.jpeg";
 import FocusCapsule from "@/public/assets/focus_capsule.jpg";
 import ThinkTank from "@/public/assets/think_tank.jpg";
-import Underlines from "@/public/assets/underlines.png";
+import Underlines from "@/public/assets/underlines.jpeg";
 import Indoor from "@/public/assets/PastExp/wall_street.jpg";
 import Outdoor from "@/public/assets/PastExp/wedding_img.jpg";
 

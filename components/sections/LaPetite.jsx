@@ -1,7 +1,21 @@
 import Image from "next/image";
 
 import logo from "@/public/assets/la_petite.png";
-import coffee1 from "@/public/assets/coffee_1.png";
+
+// Import individual drink images
+import matchaLatte from "@/public/assets/Coffee/01_matcha_latte.png";
+import caramelMacchiato from "@/public/assets/Coffee/02_caramel_macchiato.png";
+import chocolate from "@/public/assets/Coffee/03_chocolate.png";
+import cappuccino from "@/public/assets/Coffee/04_cappuccino.png";
+import matchaHoney from "@/public/assets/Coffee/05_matcha_honey.png";
+import mocha from "@/public/assets/Coffee/06_mocha.png";
+import espresso from "@/public/assets/Coffee/07_espresso.png";
+import strawberryMilk from "@/public/assets/Coffee/08_strawberry_milk.png";
+import orangeAmericano from "@/public/assets/Coffee/09_orange_americano.png";
+import pureMatcha from "@/public/assets/Coffee/010_pure_matcha.png";
+import strawberry_Matcha from "@/public/assets/Coffee/011_strawberry_matcha.png";
+import americano from "@/public/assets/Coffee/012_americano.png";
+import coconutMatcha from "@/public/assets/Coffee/013_coconut_matcha.png";
 
 const LaPetite = () => {
   const handleBookNow = () => {
@@ -12,99 +26,92 @@ const LaPetite = () => {
     {
       id: 1,
       name: "Matcha Latte",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "38.000 kip",
+      image: matchaLatte,
       bgColor: "bg-green-100",
     },
     {
       id: 2,
       name: "Caramel Macchiato",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "38.000 kip",
+      image: caramelMacchiato,
       bgColor: "bg-orange-100",
     },
     {
       id: 3,
       name: "Chocolate",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "35.000 kip",
+      image: chocolate,
       bgColor: "bg-brown-100",
     },
     {
       id: 4,
       name: "Cappuccino",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "38.000 kip",
+      image: cappuccino,
       bgColor: "bg-amber-100",
     },
     {
       id: 5,
       name: "Matcha Honey",
       price: "40.000 kip",
-      image: coffee1,
+      image: matchaHoney,
       bgColor: "bg-green-100",
     },
     {
       id: 6,
       name: "Mocha",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "38.000 kip",
+      image: mocha,
       bgColor: "bg-amber-100",
     },
     {
       id: 7,
       name: "Matcha Lattea",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "38.000 kip",
+      image: espresso,
       bgColor: "bg-green-100",
     },
     {
       id: 8,
       name: "Strawberry Milk",
       price: "40.000 kip",
-      image: coffee1,
+      image: strawberryMilk,
       bgColor: "bg-pink-100",
     },
     {
       id: 9,
       name: "Orange Americano",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "35.000 kip",
+      image: orangeAmericano,
       bgColor: "bg-orange-100",
     },
     {
       id: 10,
       name: "Pure Matcha",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "35.000 kip",
+      image: pureMatcha,
       bgColor: "bg-green-200",
     },
     {
       id: 11,
       name: "Strawberry Matcha",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "50.000 kip",
+      image: strawberry_Matcha,
       bgColor: "bg-pink-100",
     },
     {
       id: 12,
       name: "Americano",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "30.000 kip",
+      image: americano,
       bgColor: "bg-amber-100",
     },
     {
       id: 13,
       name: "Coconut Matcha",
-      price: "40.000 kip",
-      image: coffee1,
-      bgColor: "bg-green-100",
-    },
-    {
-      id: 14,
-      name: "Coconut Matcha",
-      price: "40.000 kip",
-      image: coffee1,
+      price: "50.000 kip",
+      image: coconutMatcha,
       bgColor: "bg-green-100",
     },
   ];
@@ -121,6 +128,9 @@ const LaPetite = () => {
                 src={logo}
                 alt="La Petite logo"
                 className="w-full h-[120px] object-contain"
+                priority // Load immediately (above the fold)
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               />
             </div>
 
@@ -136,34 +146,12 @@ const LaPetite = () => {
       </div>
 
       {/* Menu Grid */}
-      <div className="max-w-2xl mx-auto px-4 py-4 pt-0  bg-white">
+      <div className="max-w-2xl mx-auto px-4 py-4 pt-0 bg-white">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-2xl overflow-hidden transition-shadow duration-300"
-            >
-              {/* Drink Image */}
-              <div className=" flex justify-center items-center h-auto">
-                <div className="w-24 h-32 rounded-lg flex items-center justify-center">
-                  <div className=" w-full h-[130px]">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-[130px] object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Drink Info */}
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {item.name}
-                </h3>
-                <p className="text-red-600 font-bold text-lg">{item.price}</p>
-              </div>
-            </div>
+            <Suspense key={item.id} fallback={<MenuItemSkeleton />}>
+              <MenuItem item={item} />
+            </Suspense>
           ))}
         </div>
 
@@ -176,25 +164,6 @@ const LaPetite = () => {
             Book Now
           </button>
         </div>
-
-        {/* Operating Hours */}
-        {/* <div className="bg-white rounded-lg p-6 mt-6 shadow-sm">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Operating Hours
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
-              <div>
-                <p className="font-medium">Monday - Friday</p>
-                <p>7:00 AM - 7:00 PM</p>
-              </div>
-              <div>
-                <p className="font-medium">Saturday - Sunday</p>
-                <p>8:00 AM - 6:00 PM</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

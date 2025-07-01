@@ -391,6 +391,53 @@ export const RoomFeatures = {
 };
 
 // Room amenities configuration
+// Complete PresentationFacilities for all rooms
+export const PresentationFacilities = {
+  "focus capsule": [
+    { icon: "Edit", name: "Whiteboards" },
+    { icon: "Users", name: "Private Workspace" },
+    { icon: "Wifi", name: "High-speed Internet" },
+    { icon: "Coffee", name: "Meeting Space" },
+  ],
+  "share hives": [
+    { icon: "Monitor", name: "Multiple Workstations" },
+    { icon: "Coffee", name: "Coffee Available" },
+    { icon: "Code", name: "Concentration Space" },
+    { icon: "Wifi", name: "Free Wi-Fi" },
+  ],
+  "think tank": [
+    { icon: "Volume2", name: "Speaker Set" },
+    { icon: "Monitor", name: "Projector" },
+    { icon: "Edit", name: "Whiteboard" },
+    { icon: "Coffee", name: "Drinking Water" },
+  ],
+  underlines: [
+    { icon: "Monitor", name: "Large Projection Screen" },
+    { icon: "Monitor", name: "4K Projector" },
+    { icon: "Volume2", name: "Professional Sound System" },
+    { icon: "Volume2", name: "Wireless Microphones" },
+  ],
+  "event space": [
+    { icon: "Users", name: "Open Lawn Setup" },
+    { icon: "Tent", name: "Tent Arrangements" },
+    { icon: "Monitor", name: "Stage Setup" },
+    { icon: "Coffee", name: "Catering Services" },
+  ],
+  "event space indoor": [
+    { icon: "Snowflake", name: "Climate Control" },
+    { icon: "Volume2", name: "Sound System" },
+    { icon: "Monitor", name: "4K Projection" },
+    { icon: "Sun", name: "Professional Lighting" },
+  ],
+  "event space outdoor": [
+    { icon: "Trees", name: "Garden Views" },
+    { icon: "Calendar", name: "Event Planning" },
+    { icon: "Coffee", name: "Catering Coordination" },
+    { icon: "Tent", name: "Weather Protection" },
+  ],
+};
+
+// Updated RoomAmenities - Remove "Presentation Equipment" and similar facility-heavy amenities
 export const RoomAmenities = {
   "focus capsule": [
     {
@@ -398,12 +445,6 @@ export const RoomAmenities = {
       title: "Small Team Capacity",
       description:
         "Perfect for 2-5 people teams requiring private workspace for focused collaboration and productivity.",
-    },
-    {
-      icon: "Monitor",
-      title: "Equipment",
-      description:
-        "Whiteboards for brainstorming and planning, ensuring productive meetings and creative sessions.",
     },
     {
       icon: "Wifi",
@@ -420,12 +461,6 @@ export const RoomAmenities = {
         "Open workspace designed for teams of 6-12 people working on collaborative projects.",
     },
     {
-      icon: "Monitor",
-      title: "Shared Resources",
-      description:
-        "Multiple workstations, shared whiteboards, and presentation equipment for team productivity.",
-    },
-    {
       icon: "Wifi",
       title: "High-Speed Internet",
       description:
@@ -438,12 +473,6 @@ export const RoomAmenities = {
       title: "Flexible Seating Arrangements",
       description:
         "U-shaped configuration, Horseback style seating (70 people max), Theater-style seating, Classroom-style seating for groups of 12-25 people.",
-    },
-    {
-      icon: "Monitor",
-      title: "Presentation Equipment",
-      description:
-        "Speaker set, Projector, Whiteboard for capturing ideas and strategies, plus drinking water for extended sessions.",
     },
     {
       icon: "Wifi",
@@ -460,18 +489,6 @@ export const RoomAmenities = {
         "Accommodates 30-70 people with multiple seating configurations: U-Shape (30-40), Long Table Conference (25-35), Boardroom Style (20-30), Hollow Square (35-45), Classroom Style (50-70), Theater Style (60-70).",
     },
     {
-      icon: "Monitor",
-      title: "Professional AV Equipment",
-      description:
-        "Large projection screen with 4K projector for professional presentations, visual content, and multimedia displays suitable for large audiences.",
-    },
-    {
-      icon: "Volume2", // Changed to Volume2 for sound system
-      title: "Sound System & Microphones",
-      description:
-        "Professional sound system with wireless microphones ensuring clear audio throughout the facility for presentations, training sessions, and conferences.",
-    },
-    {
       icon: "Wifi",
       title: "Enterprise-Grade Connectivity",
       description:
@@ -483,31 +500,13 @@ export const RoomAmenities = {
       icon: "Users",
       title: "Large-Scale Outdoor Capacity",
       description:
-        "Accommodates 50+ people with flexible setup options: Open lawn setup for large gatherings (100+ people), tent and canopy arrangements, stage setups, banquet configurations, and activity zones.",
+        "Accommodates 50+ people with flexible setup options for various outdoor events and celebrations.",
     },
     {
       icon: "Calendar",
-      title: "Event Setup Services",
+      title: "Professional Event Management",
       description:
-        "Professional event planning, table and chair arrangements, stage setup, decorations, and complete event coordination for all types of outdoor events.",
-    },
-    {
-      icon: "Coffee",
-      title: "Catering Services",
-      description:
-        "Full catering options, beverage stations, outdoor kitchen facilities, and dining setups for events of all sizes with professional service staff.",
-    },
-    {
-      icon: "Monitor",
-      title: "Audio-Visual Equipment",
-      description:
-        "Portable sound systems, wireless microphones, outdoor screens, professional lighting, and multimedia equipment for presentations and entertainment.",
-    },
-    {
-      icon: "Users",
-      title: "Weather Protection",
-      description:
-        "Tent rentals, canopies, covered seating areas, backup indoor options, and weather contingency planning for year-round event hosting.",
+        "Complete event coordination with professional staff to ensure seamless outdoor celebrations and gatherings.",
     },
     {
       icon: "Wifi",
@@ -524,16 +523,16 @@ export const RoomAmenities = {
         "Climate-controlled indoor space accommodating 50-200 people with flexible seating arrangements and multiple layout options.",
     },
     {
-      icon: "Monitor",
-      title: "Professional AV Equipment",
+      icon: "Star",
+      title: "Event Coordination",
       description:
-        "State-of-the-art sound system, 4K projection, professional lighting, and multimedia equipment for presentations and entertainment.",
+        "Professional event planning and technical support for successful indoor events and celebrations.",
     },
     {
       icon: "Wifi",
       title: "Enterprise Connectivity",
       description:
-        "High-speed internet, robust Wi-Fi coverage, and technical support throughout your indoor event.",
+        "High-speed internet with robust Wi-Fi coverage and technical support throughout your indoor event.",
     },
   ],
   "event space outdoor": [
@@ -541,13 +540,13 @@ export const RoomAmenities = {
       icon: "Users",
       title: "Outdoor Event Capacity",
       description:
-        "Beautiful outdoor setting for 50-300 guests with garden views, flexible setup options, and weather contingency planning.",
+        "Beautiful outdoor setting for 50-300 guests with garden views and flexible setup options with weather planning.",
     },
     {
-      icon: "Calendar",
+      icon: "Star",
       title: "Complete Event Services",
       description:
-        "Full event planning, catering coordination, tent rentals, decorations, and professional event management staff.",
+        "Full event planning with catering coordination and professional event management staff for memorable outdoor celebrations.",
     },
     {
       icon: "Wifi",
@@ -593,6 +592,7 @@ export default {
   NavigationUtils,
   RoomFeatures,
   RoomAmenities,
+  PresentationFacilities,
   // Legacy function exports
   getDaysOfWeek,
   getMonthName,

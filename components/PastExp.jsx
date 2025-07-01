@@ -22,6 +22,7 @@ import Event6 from "@/public/assets/PastExp/econox2_img.jpg";
 import Event7 from "@/public/assets/PastExp/xmas_market.jpg";
 import Event8 from "@/public/assets/PastExp/board_game_img.jpg";
 import Event9 from "@/public/assets/PastExp/organization_meeting.jpg";
+import Event10 from "@/public/assets/PastExp/hope_img.jpg";
 
 // Mock data for the spaces
 const spaces = [
@@ -87,6 +88,13 @@ const spaces = [
     description: "",
     place: "At Underlines",
     image: Event9,
+  },
+  {
+    id: 10,
+    name: "HOPE",
+    description: "Judge Conference ",
+    place: "At ThinkTank",
+    image: Event10,
   },
 ];
 
