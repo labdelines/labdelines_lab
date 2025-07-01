@@ -1,8 +1,7 @@
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 import logo from "@/public/assets/la_petite.png";
-
-import { lazy, Suspense } from "react";
 
 // Import individual drink images
 import matchaLatte from "@/public/assets/Coffee/01_matcha_latte.png";
@@ -19,7 +18,45 @@ import strawberry_Matcha from "@/public/assets/Coffee/011_strawberry_matcha.png"
 import americano from "@/public/assets/Coffee/012_americano.png";
 import coconutMatcha from "@/public/assets/Coffee/013_coconut_matcha.png";
 
+// Skeleton Components
+const SkeletonCard = () => (
+  <div className="bg-white rounded-2xl overflow-hidden animate-pulse">
+    {/* Image Skeleton */}
+    <div className="flex justify-center items-center h-auto">
+      <div className="w-24 h-32 rounded-lg flex items-center justify-center">
+        <div className="w-full h-[130px] bg-gray-200 rounded-lg"></div>
+      </div>
+    </div>
+
+    {/* Content Skeleton */}
+    <div className="p-4 text-center space-y-2">
+      <div className="h-6 bg-gray-200 rounded-md mx-auto w-3/4"></div>
+      <div className="h-5 bg-gray-200 rounded-md mx-auto w-1/2"></div>
+    </div>
+  </div>
+);
+
+const SkeletonHeader = () => (
+  <div className="bg-white shadow-sm animate-pulse">
+    <div className="max-w-4xl mx-auto px-4 pt-8 pb-2">
+      <div className="text-center mb-8">
+        {/* Logo Skeleton */}
+        <div className="mb-6 w-full h-[120px] bg-gray-200 rounded-lg"></div>
+
+        {/* Menu Header Skeleton */}
+        <div className="bg-gray-100 rounded-2xl p-6 mb-2">
+          <div className="h-8 bg-gray-200 rounded-md mx-auto w-48 mb-2"></div>
+          <div className="h-6 bg-gray-200 rounded-md mx-auto w-24"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const LaPetite = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState(new Set());
+
   const handleBookNow = () => {
     window.open("https://wa.me/85602052242244", "_blank");
   };
@@ -118,6 +155,46 @@ const LaPetite = () => {
     },
   ];
 
+  // Handle image load
+  const handleImageLoad = (itemId) => {
+    setLoadedImages((prev) => {
+      const newSet = new Set(prev);
+      newSet.add(itemId);
+      return newSet;
+    });
+  };
+
+  // Simulate initial loading and check if all images are loaded
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500); // Minimum loading time for better UX
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Show skeleton while loading
+  if (isLoading) {
+    return (
+      <div id="details" className="min-h-screen bg-gray-50 pt-10">
+        <SkeletonHeader />
+
+        <div className="max-w-2xl mx-auto px-4 py-4 pt-0 bg-white">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 13 }, (_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          </div>
+
+          {/* Book Now Button Skeleton */}
+          <div className="text-center mt-12 mb-8">
+            <div className="h-12 bg-gray-200 rounded-lg mx-auto w-32 animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div id="details" className="min-h-screen bg-gray-50 pt-10">
       {/* Header */}
@@ -130,9 +207,7 @@ const LaPetite = () => {
                 src={logo}
                 alt="La Petite logo"
                 className="w-full h-[120px] object-contain"
-                priority // Load immediately (above the fold)
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                priority
               />
             </div>
 
@@ -151,9 +226,39 @@ const LaPetite = () => {
       <div className="max-w-2xl mx-auto px-4 py-4 pt-0 bg-white">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {menuItems.map((item) => (
-            <Suspense key={item.id} fallback={<MenuItemSkeleton />}>
-              <MenuItem item={item} />
-            </Suspense>
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl overflow-hidden transition-shadow duration-300"
+            >
+              {/* Drink Image */}
+              <div className="flex justify-center items-center h-auto relative">
+                <div className="w-24 h-32 rounded-lg flex items-center justify-center">
+                  <div className="w-full h-[130px] relative">
+                    {/* Image skeleton that shows while image is loading */}
+                    {!loadedImages.has(item.id) && (
+                      <div className="absolute inset-0 bg-gray-200 rounded-lg animate-pulse"></div>
+                    )}
+
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className={`w-full h-[130px] object-contain transition-opacity duration-300 ${
+                        loadedImages.has(item.id) ? "opacity-100" : "opacity-0"
+                      }`}
+                      onLoad={() => handleImageLoad(item.id)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Drink Info */}
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {item.name}
+                </h3>
+                <p className="text-red-600 font-bold text-lg">{item.price}</p>
+              </div>
+            </div>
           ))}
         </div>
 
