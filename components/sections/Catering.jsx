@@ -17,7 +17,8 @@ const Catering = () => {
       {
         type: "Normal",
         drinks: "1 Drink + 1 Dessert",
-        description: "Coffee Break 1 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 1 ອັນ (ຕອຍ້ອຍ)",
+        description:
+          "Coffee Break 1 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມເຄິ່ງມື້ (4ຊົ່ວໂມງ) ເລືອກເມນູ ຂອງວ່າງໄດ້ 1 ຢ່າງ",
         price: "60.000",
         bgColor: "bg-rose-50",
         borderColor: "border-rose-200",
@@ -26,7 +27,8 @@ const Catering = () => {
       {
         type: "Plus +",
         drinks: "1 Drink + 2 Desserts",
-        description: "Coffee Break 1 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 2 ອັນ (ຕອຍ້ອຍ)",
+        description:
+          "Coffee Break 1 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມເຄິ່ງມື້ (4ຊົ່ວໂມງ) ເລືອກ ເຄື່ອງດື່ມໄດ້ 1 ເມນູ ແລະ  ຂອງວ່າງໄດ້ 2 ຢ່າງ",
         price: "95.000",
         bgColor: "bg-rose-50",
         borderColor: "border-rose-200",
@@ -37,7 +39,8 @@ const Catering = () => {
       {
         type: "Normal",
         drinks: "2 Drinks + 2 Desserts",
-        description: "Coffee Break 2 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 2 ອັນ (ຕອຍ້ອຍ)",
+        description:
+          "Coffee Break 2 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມຫມົດມື້ (8ຊົ່ວໂມງ) ເລືອກ ເຄື່ອງດື່ມໄດ້ 2 ເມນູ ແລະ ຂອງວ່າງ 2 ຢ່າງ",
         price: "120.000",
         bgColor: "bg-red-800",
         borderColor: "border-red-800",
@@ -46,7 +49,8 @@ const Catering = () => {
       {
         type: "Plus +",
         drinks: "2 Drinks + 3 Desserts",
-        description: "Coffee Break 2 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 3 ອັນ (ຕອຍ້ອຍ)",
+        description:
+          "Coffee Break 2 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມຫມົດມື້ (8ຊົ່ວໂມງ) ເລືອກ ເຄື່ອງດື່ມໄດ້ 2 ເມນູ  ແລະ ຂອງວ່າງ 3 ຢ່າງ",
         price: "180.000",
         bgColor: "bg-red-800",
         borderColor: "border-red-800",
@@ -57,8 +61,9 @@ const Catering = () => {
       {
         type: "Normal",
         drinks: "1 Drink + 1 Dessert + 1 Lunch",
-        description: "Coffee Break 1 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 1 ອັນ (ຕອຍ້ອຍ)",
-        subDescription: "ອາຫານກາງມື້ 1 ຈານ + ນ້ຳດື່ມ 1 ແກ້ວ + ຂ້າວໜຽວມ່ວງ",
+        description:
+          "Coffee Break 1 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມເຄິ່ງມື້ (4ຊົ່ວໂມງ) ເລືອກເມນູ  ຂອງວ່າງ 1 ຢ່າງ ແລະ 1 ອາຫານສວາຍ",
+
         price: "160.000",
         bgColor: "bg-rose-50",
         borderColor: "border-rose-200",
@@ -67,9 +72,9 @@ const Catering = () => {
       {
         type: "Plus +",
         drinks: "1 Drink + 2 Desserts + 1 Lunch",
-        description: "Coffee Break 1 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 2 ອັນ (ຕອຍ້ອຍ)",
-        subDescription:
-          "ອາຫານກາງມື້ 1 ຈານ + ນ້ຳດື່ມ 2 ແກ້ວ + ຂ້າວໜຽວມ່ວງ 3 ໂລ່ + ຂ້າວໜຽວມ່ວງ",
+        description:
+          "Coffee Break 1 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມເຄິ່ງມື້ (4ຊົ່ວໂມງ) ເລືອກ ເຄື່ອງດື່ມໄດ້ 1 ເມນູ , 2 ອາຫານວ່າງ ແລະ 1 ອາຫານສວາຍ",
+
         price: "190.000",
         bgColor: "bg-rose-50",
         borderColor: "border-rose-200",
@@ -80,7 +85,8 @@ const Catering = () => {
       {
         type: "Normal",
         drinks: "2 Drinks + 2 Desserts + 1 Lunch",
-        description: "Coffee Break 2 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 2 ອັນ (ຕອຍ້ອຍ)",
+        description:
+          "Coffee Break 2 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມຫມົດມື້ (8ຊົ່ວໂມງ) ເລືອກເມນູ  ຂອງວ່າງ 2 ຢ່າງ",
         price: "220.000",
         bgColor: "bg-red-800",
         borderColor: "border-red-800",
@@ -89,9 +95,9 @@ const Catering = () => {
       {
         type: "Plus +",
         drinks: "2 Drinks + 3 Desserts + 1 Lunch",
-        description: "Coffee Break 2 ເຄື່ອງດື່ມ + ຂອງຫວານອື່ນໆ 3 ອັນ (ຕອຍ້ອຍ)",
-        subDescription:
-          "ອາຫານກາງມື້ 2 ຈານ + ນ້ຳດື່ມ 3 ໂລ່ + ຂ້າວໜຽວມ່ວງ 3 ໂລ່ + ຂ້າວໜຽວມ່ວງ",
+        description:
+          "Coffee Break 2 ຄັ້ງ / ສຳລັບຫ້ອງປະຊຸມຫມົດມື້ (8ຊົ່ວໂມງ) ເລືອກເມນູ  ຂອງວ່າງ 2 ຢ່າງ",
+
         price: "280.000",
         bgColor: "bg-red-800",
         borderColor: "border-red-800",
@@ -263,11 +269,6 @@ const Catering = () => {
                 <p className={`text-sm ${pkg.textColor} mb-1`}>
                   {pkg.description}
                 </p>
-                {pkg.subDescription && (
-                  <p className={`text-sm ${pkg.textColor}`}>
-                    {pkg.subDescription}
-                  </p>
-                )}
               </div>
             ))}
           </div>

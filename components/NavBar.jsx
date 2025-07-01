@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isMenuActive, setIsMenuActive] = useState("/");
   const [isScrollActive, setIsScrollActive] = useState(false);
   const router = useRouter();
+  const navbarRef = useRef(null); // Reference to the navbar container
 
   const pathname = usePathname();
   const isNotHomePage = pathname !== "/";
@@ -73,12 +74,43 @@ const Navbar = () => {
     }
   };
 
+  // Close mobile menu when clicking outside (only on non-home pages)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMenuOpen &&
+        isNotHomePage && // Only close on click outside when NOT on home page
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Add event listener when menu is open and not on home page
+    if (isMenuOpen && isNotHomePage) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    // Clean up event listeners
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isMenuOpen, isNotHomePage]);
+
   // Handle scroll events
   useEffect(() => {
     console.log("Navbar mounted");
 
     const handleScroll = () => {
       console.log("Scroll Y:", window.scrollY);
+
+      // Close mobile menu when scrolling (only on non-home pages)
+      if (isMenuOpen && isNotHomePage) {
+        setIsMenuOpen(false);
+      }
 
       // Update scroll active state
       if (window.scrollY > 100) {
@@ -102,12 +134,17 @@ const Navbar = () => {
       console.log("Navbar unmounted, removing scroll listener");
       window.removeEventListener("scroll", handleScroll);
     };
+  }, [pathname, isMenuOpen]); // Added isMenuOpen to dependencies
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
   }, [pathname]);
 
   // Handle navigation
   const handleNavigation = (navId) => {
     setIsMenuActive(navId);
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Always close menu when navigating
 
     if (navId === "/") {
       // Navigate to home page
@@ -131,6 +168,23 @@ const Navbar = () => {
       }
     }
   };
+
+  // Close menu when pressing Escape key (only on non-home pages)
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape" && isMenuOpen && isNotHomePage) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen && isNotHomePage) {
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isMenuOpen, isNotHomePage]);
 
   // Update active menu based on current hash (for direct URL access)
   useEffect(() => {
@@ -174,6 +228,7 @@ const Navbar = () => {
 
   return (
     <div
+      ref={navbarRef} // Add ref to the navbar container
       className={`w-full fixed top-0 left-0 z-50  ${
         isMenuOpen || isScrollActive || isNotHomePage
           ? "bg-white"
@@ -212,6 +267,8 @@ const Navbar = () => {
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2"
+          aria-label="Toggle mobile menu"
+          aria-expanded={isMenuOpen}
         >
           <Menu
             className={`w-6 h-6 ${
