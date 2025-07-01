@@ -24,7 +24,7 @@ import {
 } from "@/src/lib/calendar.js";
 
 import Image from "next/image";
-import underlines_img from "@/public/assets/underlines.jpg";
+import underlines_img from "@/public/assets/underlines.jpeg";
 
 // Import the separated modal component
 import BookingModal from "@/src/lib/bookingModal.js";
