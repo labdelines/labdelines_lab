@@ -102,10 +102,10 @@ const Navbar = () => {
 
   // Handle scroll events
   useEffect(() => {
-    console.log("Navbar mounted");
+    // console.log("Navbar mounted");
 
     const handleScroll = () => {
-      console.log("Scroll Y:", window.scrollY);
+      // console.log("Scroll Y:", window.scrollY);
 
       // Close mobile menu when scrolling (only on non-home pages)
       if (isMenuOpen && isNotHomePage) {
@@ -114,10 +114,10 @@ const Navbar = () => {
 
       // Update scroll active state
       if (window.scrollY > 100) {
-        console.log("Setting scroll active TRUE");
+        // console.log("Setting scroll active TRUE");
         setIsScrollActive(true);
       } else {
-        console.log("Setting scroll active FALSE");
+        // console.log("Setting scroll active FALSE");
         setIsScrollActive(false);
       }
 
@@ -131,7 +131,7 @@ const Navbar = () => {
     detectActiveSection();
 
     return () => {
-      console.log("Navbar unmounted, removing scroll listener");
+      // console.log("Navbar unmounted, removing scroll listener");
       window.removeEventListener("scroll", handleScroll);
     };
   }, [pathname, isMenuOpen]); // Added isMenuOpen to dependencies

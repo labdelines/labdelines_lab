@@ -69,7 +69,7 @@ const DynamicRoomBooking = ({ roomId: propRoomId }) => {
       setIsLoading(true);
       setError(null);
 
-      console.log(`Loading ${currentRoomConfig.displayName} booking data...`);
+      // console.log(`Loading ${currentRoomConfig.displayName} booking data...`);
       const allBookings = await BookingUtils.loadBookingData();
 
       // Filter for current room bookings
@@ -95,12 +95,12 @@ const DynamicRoomBooking = ({ roomId: propRoomId }) => {
         }));
 
       setBookings(currentRoomBookings);
-      console.log(
-        `${currentRoomConfig.displayName} bookings loaded:`,
-        currentRoomBookings.length
-      );
+      // console.log(
+      //   `${currentRoomConfig.displayName} bookings loaded:`,
+      //   currentRoomBookings.length
+      // );
     } catch (error) {
-      console.error("Error loading booking data:", error);
+      // console.error("Error loading booking data:", error);
       setError(error.message);
     } finally {
       setIsLoading(false);
