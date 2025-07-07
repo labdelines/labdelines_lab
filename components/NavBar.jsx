@@ -259,7 +259,7 @@ const Navbar = () => {
               isMenuOpen || isScrollActive || isNotHomePage ? "" : "hidden"
             }`}
           >
-            LABDELINES
+            LAB DE LINES
           </span>
         </div>
 

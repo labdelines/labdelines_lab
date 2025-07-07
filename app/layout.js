@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Sora } from "next/font/google";
 
+import logo from "@/app/favicon.ico";
+
 const sora = Sora({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -22,6 +24,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "LABDELINES",
   description: "Co-working Space",
+  icon: logo,
 };
 
 export default function RootLayout({ children }) {

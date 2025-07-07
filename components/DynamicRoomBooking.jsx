@@ -69,19 +69,124 @@ const DynamicRoomBooking = ({ roomId: propRoomId }) => {
       setIsLoading(true);
       setError(null);
 
-      // console.log(`Loading ${currentRoomConfig.displayName} booking data...`);
+      console.log(`Loading ${currentRoomConfig.displayName} booking data...`);
       const allBookings = await BookingUtils.loadBookingData();
 
-      // Filter for current room bookings
+      // ===== DEBUG LOGGING FOR CURRENT MONTH =====
+
+      // 1. Log all raw booking data
+      console.group("📊 ALL BOOKING DATA DEBUG");
+      console.log("Total bookings loaded:", allBookings.length);
+      console.log("All bookings:", allBookings);
+
+      // 2. Filter bookings for current month (regardless of room)
+      const currentMonthBookings = allBookings.filter((booking) => {
+        const bookingDate = new Date(booking.date);
+        const currentDate = new Date(currentYear, currentMonth);
+
+        return (
+          bookingDate.getFullYear() === currentYear &&
+          bookingDate.getMonth() === currentMonth
+        );
+      });
+
+      console.log(
+        `\n📅 CURRENT MONTH BOOKINGS (${CalendarUtils.getMonthName(
+          currentMonth
+        )} ${currentYear}):`
+      );
+      console.log("Month bookings count:", currentMonthBookings.length);
+      console.table(currentMonthBookings);
+
+      // 3. Group by room for current month
+      const roomGroups = currentMonthBookings.reduce((groups, booking) => {
+        const roomName = booking.room || "Unknown Room";
+        if (!groups[roomName]) {
+          groups[roomName] = [];
+        }
+        groups[roomName].push(booking);
+        return groups;
+      }, {});
+
+      console.log("\n🏢 BOOKINGS BY ROOM THIS MONTH:");
+      Object.entries(roomGroups).forEach(([room, bookings]) => {
+        console.log(`${room}: ${bookings.length} bookings`);
+        console.table(bookings);
+      });
+
+      // 4. Group by status for current month
+      const statusGroups = currentMonthBookings.reduce((groups, booking) => {
+        const status = booking.status || "No Status";
+        if (!groups[status]) {
+          groups[status] = [];
+        }
+        groups[status].push(booking);
+        return groups;
+      }, {});
+
+      console.log("\n📋 BOOKINGS BY STATUS THIS MONTH:");
+      Object.entries(statusGroups).forEach(([status, bookings]) => {
+        console.log(`${status}: ${bookings.length} bookings`);
+        console.table(bookings);
+      });
+
+      // 5. Filter for current room (your existing logic)
       const currentRoomBookings = allBookings
         .filter((booking) => {
-          const roomName = booking.room ? booking.room.toLowerCase() : "";
-          const targetRoomKey = currentRoomConfig.key.toLowerCase();
+          const roomName = booking.room
+            ? booking.room.toLowerCase().trim()
+            : "";
+          const targetRoomKey = currentRoomConfig.key.toLowerCase().trim();
 
-          // Handle special cases for room filtering
+          console.log("🔍 Filtering booking:", {
+            roomName,
+            targetRoomKey,
+            roomId,
+            date: booking.date,
+            status: booking.status,
+            matches:
+              roomName.includes(targetRoomKey) || roomName === targetRoomKey,
+          });
+
+          // Your existing filtering logic here...
           if (roomId === "think_tank") {
             return (
               roomName.includes("think tank") && !roomName.includes("4th floor")
+            );
+          }
+
+          if (roomId === "focus_capsule") {
+            return (
+              roomName === "focus capsule" || roomName.includes("focus capsule")
+            );
+          }
+
+          if (roomId === "underlines") {
+            return roomName === "underlines";
+          }
+
+          if (roomId === "event_space") {
+            return (
+              roomName === "event space" ||
+              (roomName.includes("event space") &&
+                !roomName.includes("indoor") &&
+                !roomName.includes("outdoor"))
+            );
+          }
+
+          if (roomId === "event_space_indoor") {
+            return (
+              roomName === "event space indoor" ||
+              roomName.includes("event space indoor") ||
+              (roomName.includes("event space") && roomName.includes("indoor"))
+            );
+          }
+
+          if (roomId === "event_space_outdoor") {
+            return (
+              roomName === "event space outdoor" ||
+              roomName.includes("event space outdoor") ||
+              (roomName.includes("event space") && roomName.includes("outdoor"))
             );
           }
 
@@ -94,13 +199,43 @@ const DynamicRoomBooking = ({ roomId: propRoomId }) => {
           status: booking.status || "",
         }));
 
+      // 6. Log filtered results for current room
+      console.log(
+        `\n🎯 FILTERED BOOKINGS FOR ${currentRoomConfig.displayName.toUpperCase()}:`
+      );
+      console.log("Current room config:", currentRoomConfig);
+      console.log("Room ID:", roomId);
+      console.log("Target room key:", currentRoomConfig.key);
+      console.log("Filtered bookings count:", currentRoomBookings.length);
+      console.table(currentRoomBookings);
+
+      // 7. Log current month filtered bookings for this room
+      const currentRoomMonthBookings = currentRoomBookings.filter((booking) => {
+        const bookingDate = new Date(booking.date);
+        return (
+          bookingDate.getFullYear() === currentYear &&
+          bookingDate.getMonth() === currentMonth
+        );
+      });
+
+      console.log(
+        `\n📅 CURRENT ROOM BOOKINGS FOR ${CalendarUtils.getMonthName(
+          currentMonth
+        )} ${currentYear}:`
+      );
+      console.log("This month count:", currentRoomMonthBookings.length);
+      console.table(currentRoomMonthBookings);
+
+      console.groupEnd();
+      // ===== END DEBUG LOGGING =====
+
       setBookings(currentRoomBookings);
-      // console.log(
-      //   `${currentRoomConfig.displayName} bookings loaded:`,
-      //   currentRoomBookings.length
-      // );
+      console.log(
+        `${currentRoomConfig.displayName} bookings loaded:`,
+        currentRoomBookings.length
+      );
     } catch (error) {
-      // console.error("Error loading booking data:", error);
+      console.error("Error loading booking data:", error);
       setError(error.message);
     } finally {
       setIsLoading(false);
